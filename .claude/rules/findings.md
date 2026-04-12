@@ -285,17 +285,68 @@ collects." Key points to emphasize:
    manager is thinking about culture fit as much as technical skill.
    Showing that you expect to iterate signals collaborative mindset.
 
+## Phase 2 findings: cross-schedule reconciliation
+
+Phase 2 implemented three cross-schedule rules (R11, R12, R13) using Schedule
+26 data for all five years. Results:
+
+```
+R11  Schedule 26 vs S22 grand total    error   0 flags (4 years clean; 2022 SKIP)
+R12  SRA-LT vs Total sheet line 9499   error   0 flags (4 years clean; 2022 SKIP)
+R13  Grand total chain reconciliation  error   0 flags (4 years clean; 2022 SKIP)
+```
+
+Zero flags on clean data is the expected result. These are canary rules that
+confirm Schedule 22's internal arithmetic closes and that the external
+Schedule 26 filing agrees with the S22 grand total.
+
+The 2022 skip rows are the Phase 2 finding. The corruption already documented
+in the 2022 Total sheet extends to the 2022 SPC sheet (138 MunIDs mapping to
+multiple names in SPC, matching the 150 in Total). Schedule 26 for 2022 is
+clean (441 unique MunIDs, zero name collisions), confirming the corruption
+is confined to Schedule 22's internal summary sheets.
+
+A non-obvious discovery in Phase 2: the grand total chain (R13) requires
+including SPC line 7010 (PIL adjustments) to close correctly. Without it,
+York Region (2019) shows a $3.8M gap that exactly equals line 7010. The line
+represents adjustments for shared PIL properties and is added to 9910 but not
+included in 9799. This is the kind of detail a QA team would learn through
+investigation, not documentation.
+
+## Phase 2 interview framing
+
+The cross-schedule rules demonstrate three things:
+
+1. **External validation**: Schedule 26 is a separate FIR filing submitted
+   through a different mechanism. Using it as an external cross-check against
+   Schedule 22 is the most credible reconciliation possible, because neither
+   schedule can "fix" the other's errors retroactively.
+
+2. **Corruption scope confirmation**: The 2022 corruption is in Schedule 22's
+   summary layer. Schedule 26 for 2022 is clean. This matters because it tells
+   a ministry analyst "the source data is probably fine; the problem is in how
+   the summary was generated or exported."
+
+3. **Honest calibration continues**: Three rules producing zero flags on clean
+   data is not a failure. It is exactly what a well-maintained system should
+   produce. The rules exist so that if a future submission breaks the chain,
+   the framework surfaces it rather than letting it go unnoticed.
+
+---
+
 ## What to bring to the interview
 
 - A laptop open to the GitHub repo (once it is published)
-- The reports/ directory with CSVs for all 5 years plus cross_year/
+- The reports/ directory with CSVs for all 5 years, cross_year/, and cross_schedule/
 - A printed or displayed methodology note summarizing the rule set
-- Specific numbers ready: "8 rules across 5 years (2019-2023), 444
+- Specific numbers ready: "11 rules across 5 years (2019-2023), up to 444
   municipalities. Zero false positives on strict single-year checks.
   Cross-year analysis caught a municipality filing with zero municipal
-  tax rates in 2023, a 2022 file with corrupted Total sheet IDs across
-  122 municipalities, Brant County's $12.9M Phase-In excess, and three
-  municipalities with 30-50% rate jumps in a single year."
+  tax rates in 2023, a 2022 file with corrupted MunID columns in both the
+  Total sheet and SPC sheet (confirmed clean in Schedule 26), Brant County's
+  $12.9M Phase-In excess, and three municipalities with 30-50% rate jumps.
+  Cross-schedule reconciliation (R11-R13) confirms Schedule 26 and Schedule
+  22 agree province-wide for all clean years."
 - A prepared answer to "what would you do next": see roadmap.md
 
 ## Questions you might get asked

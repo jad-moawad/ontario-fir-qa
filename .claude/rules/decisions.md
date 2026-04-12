@@ -1,5 +1,90 @@
 # Decision Log
 
+---
+
+## 2026-04-10: Schedule 26 architecture: S26-1 line 9199 matches SPC line 9990 (not 9910)
+
+**Finding**: When comparing Schedule 26-1 line 9199 ("TOTAL before Adj.") to
+Schedule 22 SPC, the correct reconciliation target is SPC line 9990, not SPC
+line 9910. SPC line 9990 equals 9910 plus SRA surcharges (the 8xxx lines in
+SPC). St Catharines illustrates this clearly: SPC 9910 = $275.5M but SPC 9990
+= $338.1M, with the $62.5M difference being SRA-based surcharges (lines 8035,
+8097, 9890). S26-1 line 9199 = $338.1M, matching 9990 exactly.
+
+Testing across all four clean years (2019, 2020, 2021, 2023) confirms zero
+discrepancies at $2 tolerance using S26 9199 vs SPC 9990. Testing with SPC
+9910 instead produced 307 discrepancies for 2023 alone, all false positives.
+
+**Column mapping confirmed**: In Schedule 26-1, the numeric data columns are:
+col 03 = TOTAL Taxes, col 04 = LT/ST Taxes, col 05 = UT Taxes, col 06 = EDUC.
+This was reverse-engineered by matching S26-1 line 10 (Residential) values for
+Addington Highlands to the GPL residential RT row for the same municipality.
+
+---
+
+## 2026-04-10: 2022 SPC sheet is also corrupted (same defect as Total sheet)
+
+**Finding**: The MunID column corruption in the 2022 Schedule 22 file that
+was previously documented in the Total sheet also affects the SPC sheet. The
+2022 SPC sheet has 138 MunIDs mapping to multiple municipality names, with
+325 of 441 unique MunIDs in the line 9990 data. This is confirmed by running
+the same zero-tolerance MunID pre-check on the SPC sheet.
+
+Schedule 26 for 2022 is NOT corrupted (S26-1 has 441 unique MunIDs with zero
+name collisions). The corruption is specific to the Schedule 22 internal
+summary sheets (Total and SPC) and does not extend to Schedule 26, which is
+collected as a separate FIR submission.
+
+**Consequence for R11**: R11 (S26 vs SPC reconciliation) cannot run on 2022
+because the SPC reference value is unreliable. The rule emits a diagnostic
+skip row naming the 138 corrupted MunIDs. The phrase "Schedule 26 data is
+clean for this year" is included in the skip message to highlight that the
+external cross-check could theoretically be run, but we have no trustworthy
+SPC value to compare against.
+
+---
+
+## 2026-04-10: R13 grand total chain must include SPC line 7010 (PIL adjustment)
+
+**Finding**: The initial R13 implementation without SPC line 7010 produced 8
+discrepancies in 2019 and 11 in 2020. The largest was York Region (19000) with
+a $3.8M gap in both years. Inspection of York's SPC sheet revealed line 7010
+with TOTAL = $3,805,332 in 2019, exactly equal to the gap.
+
+Line 7010 is the "Payments-In-Lieu PIL Adjustments" line in SPC. It records
+adjustments for shared PIL properties (properties where PILT is split across
+multiple municipalities). This adjustment is added to compute SPC line 9910
+but is NOT included in line 9799 (the SPC subtotal). The correct identity is:
+
+    GPL(9299) + SRA-LT(9499) + SRA-UT(9699) + SPC(9799) + SPC(7010) = SPC(9910)
+
+After including line 7010, R13 produces zero discrepancies across all four
+clean years (2019, 2020, 2021, 2023). Rule 07 from the roadmap described the
+identity without line 7010; the correct formula required exploration of the
+data to discover.
+
+---
+
+## 2026-04-10: Phase 2 rules are canaries, not headline finders
+
+**Observation**: R11, R12, and R13 all produce zero flags on clean data. This
+is by design: they confirm that the FIR's internal arithmetic is consistent
+and that Schedule 22 agrees with the external Schedule 26 filing. The absence
+of flags is itself a quality signal.
+
+**Interview framing**: The correct framing is "these rules establish a
+reconciliation baseline. If any future year's submission breaks this chain,
+the framework will surface it immediately. The 2022 year is a concrete
+example of what detection looks like: R11 correctly skips 2022 and reports
+why, instead of flooding the report with misleading error flags."
+
+The INTERESTING finding from Phase 2 is the extension of the 2022 corruption
+to the SPC sheet, and the discovery that Schedule 26 (a different filing)
+is clean for the same year. This creates a natural narrative: the corruption
+is in Schedule 22's summary layer only, not in the underlying data.
+
+---
+
 Non-obvious choices made during development, with reasoning. This is the
 most valuable artifact for the interview: it proves the developer thought
 through tradeoffs rather than following a checklist.

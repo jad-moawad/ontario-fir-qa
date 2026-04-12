@@ -20,6 +20,18 @@ Cross-year mode (new in Phase 1):
     Writes to the output directory:
         cross_year_summary.csv       one row per rule with flag counts
         <rule_id>_flags.csv          detailed flag rows for each rule
+
+Cross-schedule mode (new in Phase 2):
+
+    python -m fir_qa.engine cross_schedule data/raw/ reports/cross_schedule
+
+    Discovers all (schedule_22.xlsx, schedule_26.xlsx) pairs under data/raw/
+    and runs cross-schedule rules (R11 through R13) on each year. Produces
+    per-year reports plus a combined summary.
+
+    Writes to the output directory:
+        cross_schedule_summary.csv      one row per (year, rule) with flag counts
+        <year>_<rule_id>_flags.csv      detailed flag rows for each year/rule
 """
 
 from __future__ import annotations
@@ -29,9 +41,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from fir_qa.loader import load_schedule_22
+from fir_qa.loader import load_schedule_22, load_schedule_26
 from fir_qa.rules import run_all, ALL_RULES
 from fir_qa.cross_year_rules import run_all_cross_year, ALL_CROSS_YEAR_RULES
+from fir_qa.cross_schedule_rules import (
+    run_all_cross_schedule,
+    ALL_CROSS_SCHEDULE_RULES,
+)
 
 
 def build_summary(results: dict[str, pd.DataFrame]) -> pd.DataFrame:
@@ -187,9 +203,118 @@ def run_cross_year(data_dir: str | Path, output_dir: str | Path) -> pd.DataFrame
     return summary
 
 
+def build_cross_schedule_summary(
+    results_by_year: dict[int, dict[str, pd.DataFrame]]
+) -> pd.DataFrame:
+    """Build a one-row-per-(year, rule) summary for cross-schedule results."""
+    by_name = {f.__name__: f for f in ALL_CROSS_SCHEDULE_RULES}
+    rows = []
+    for year, results in sorted(results_by_year.items()):
+        for func_name, df in results.items():
+            func = by_name[func_name]
+            if len(df) == 0:
+                rows.append({
+                    "year": year,
+                    "rule_id": func.rule_id,
+                    "rule_name": func.rule_name,
+                    "severity": func.severity,
+                    "n_flags": 0,
+                    "n_municipalities": 0,
+                })
+            else:
+                # A skip row has MunID=None; count real flags only
+                real_flags = df[df["MunID"].notna()]
+                rows.append({
+                    "year": year,
+                    "rule_id": df["rule_id"].iloc[0],
+                    "rule_name": df["rule_name"].iloc[0],
+                    "severity": df["severity"].iloc[0],
+                    "n_flags": len(real_flags),
+                    "n_municipalities": (
+                        real_flags["MunID"].nunique() if len(real_flags) > 0 else 0
+                    ),
+                })
+    return pd.DataFrame(rows)
+
+
+def run_cross_schedule(data_dir: str | Path, output_dir: str | Path) -> pd.DataFrame:
+    """
+    Discover all (schedule_22.xlsx, schedule_26.xlsx) pairs under data_dir,
+    run cross-schedule rules on each year, and write outputs.
+
+    Years are inferred from the parent directory name (must be an integer).
+    A year is skipped if schedule_22.xlsx is missing. If schedule_26.xlsx
+    is missing for a year, R11 emits a skip row but R12 and R13 still run
+    against schedule_22 alone.
+    """
+    data_dir = Path(data_dir)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    year_dirs = []
+    for p in sorted(data_dir.iterdir()):
+        if not p.is_dir():
+            continue
+        try:
+            year = int(p.name)
+        except ValueError:
+            continue
+        s22_path = p / "schedule_22.xlsx"
+        if not s22_path.exists():
+            continue
+        year_dirs.append((year, p))
+
+    print("=" * 72)
+    print("Ontario FIR Cross-Schedule QA Report (Phase 2)")
+    print(f"Data directory: {data_dir}")
+    print(f"Years found:    {[y for y, _ in year_dirs]}")
+    print("=" * 72)
+    print()
+
+    results_by_year: dict[int, dict[str, pd.DataFrame]] = {}
+
+    for year, year_dir in year_dirs:
+        s22_path = year_dir / "schedule_22.xlsx"
+        s26_path = year_dir / "schedule_26.xlsx"
+
+        print(f"Loading {year}...")
+        sheets_22 = load_schedule_22(s22_path)
+        sheets_26 = load_schedule_26(s26_path) if s26_path.exists() else {}
+
+        results = run_all_cross_schedule(sheets_22, sheets_26, year)
+        results_by_year[year] = results
+
+        for func_name, df in results.items():
+            if len(df) == 0:
+                continue
+            rule_id = df["rule_id"].iloc[0]
+            out_path = output_dir / f"{year}_{rule_id}_flags.csv"
+            df.to_csv(out_path, index=False)
+
+    summary = build_cross_schedule_summary(results_by_year)
+    summary.to_csv(output_dir / "cross_schedule_summary.csv", index=False)
+
+    # Print summary
+    print(summary.to_string(index=False))
+    print()
+    total_real_flags = int(summary["n_flags"].sum())
+    total_errors = int(
+        summary.loc[summary["severity"] == "error", "n_flags"].sum()
+    )
+    print(f"Total real flags:  {total_real_flags}")
+    print(f"  errors:          {total_errors}")
+    print()
+    print(f"Reports written to: {output_dir}/")
+    return summary
+
+
 def main() -> int:
     if len(sys.argv) == 4 and sys.argv[1] == "cross_year":
         run_cross_year(sys.argv[2], sys.argv[3])
+        return 0
+
+    if len(sys.argv) == 4 and sys.argv[1] == "cross_schedule":
+        run_cross_schedule(sys.argv[2], sys.argv[3])
         return 0
 
     if len(sys.argv) != 3:
