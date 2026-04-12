@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,n_flags,n_municipalities
+R08,Year-over-year total levy change,warning,6,5

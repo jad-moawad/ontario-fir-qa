@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,computed_total,reported_9910,discrepancy,detail
+R13,Grand total chain reconciliation,error,,,,,,R13 SKIPPED: Total sheet MunID column corrupted (72 MunIDs have mismatched names) for 2022

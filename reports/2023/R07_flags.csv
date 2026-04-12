@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,Tier,n_classes,tier_median,detail
+R07,Property class coverage,warning,51034,Cockburn Island Tp,ST,2,6.0,Only 2 property classes reported (tier ST median is 6)

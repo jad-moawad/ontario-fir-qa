@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,tier,gpl_sum,total_line_9299,discrepancy,detail
+R04,GPL <-> Total sheet reconciliation,error,,,ALL,,,,R04 SKIPPED: Total sheet MunID column appears corrupted (72 of 441 MunIDs map to a different municipality name than the GPL sheet). Sample: MunID 1012: GPL='Cornwall C' Total='Addington Highlands Tp'; MunID 2001: GPL='East Hawkesbury Tp' Total='Addington Highlands Tp'; MunID 2008: GPL='Hawkesbury T' Total='Addington Highlands Tp'

@@ -1,0 +1,7 @@
+rule_id,rule_name,severity,MunID,Municipality,Property Class,RTC/RTQ,CVA Assessment,Phase-In Taxable Assessment,excess,detail
+R05,Phase-In <= CVA,error,58019,Conmee Tp,"Industrial, NConstr.",J7,18700.0,137300.0,118600.0,Phase-In assessment exceeds CVA by $118600
+R05,Phase-In <= CVA,error,57096,Hornepayne Tp,Residential,RT,35194600.01,35195200.0,600.0,Phase-In assessment exceeds CVA by $600
+R05,Phase-In <= CVA,error,6005,Ottawa C,Industrial,IH,75018095.0,78926035.0,3907940.0,Phase-In assessment exceeds CVA by $3907940
+R05,Phase-In <= CVA,error,57040,The North Shore Tp,Managed Forest,TT,387900.0,417900.0,30000.0,Phase-In assessment exceeds CVA by $30000
+R05,Phase-In <= CVA,error,57040,The North Shore Tp,Commercial,CX,982600.0,1048900.0,66300.0,Phase-In assessment exceeds CVA by $66300
+R05,Phase-In <= CVA,error,57040,The North Shore Tp,Industrial,IH,309700.0,309800.0,100.0,Phase-In assessment exceeds CVA by $100

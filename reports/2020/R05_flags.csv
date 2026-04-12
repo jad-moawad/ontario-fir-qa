@@ -1,0 +1,15 @@
+rule_id,rule_name,severity,MunID,Municipality,Property Class,RTC/RTQ,CVA Assessment,Phase-In Taxable Assessment,excess,detail
+R05,Phase-In <= CVA,error,40010,Bluewater M,Residential,RT,1438804352.0,1450811556.0,12007204.0,Phase-In assessment exceeds CVA by $12007204
+R05,Phase-In <= CVA,error,40010,Bluewater M,Commercial,CX,364500.0,576500.0,212000.0,Phase-In assessment exceeds CVA by $212000
+R05,Phase-In <= CVA,error,26003,Fort Erie T,Residential,RT,3434792472.0,3494840772.0,60048300.0,Phase-In assessment exceeds CVA by $60048300
+R05,Phase-In <= CVA,error,26003,Fort Erie T,Managed Forest,TT,1461200.0,1505900.0,44700.0,Phase-In assessment exceeds CVA by $44700
+R05,Phase-In <= CVA,error,26003,Fort Erie T,Commercial,CX,20071600.0,20610200.0,538600.0,Phase-In assessment exceeds CVA by $538600
+R05,Phase-In <= CVA,error,26003,Fort Erie T,Industrial,IT,31803491.0,32792491.0,989000.0,Phase-In assessment exceeds CVA by $989000
+R05,Phase-In <= CVA,error,59012,Fort Frances T,Commercial,CU,2565.0,6565.0,4000.0,Phase-In assessment exceeds CVA by $4000
+R05,Phase-In <= CVA,error,40015,Huron East M,Residential,RT,813009600.0,849564293.0,36554693.0,Phase-In assessment exceeds CVA by $36554693
+R05,Phase-In <= CVA,error,56066,Kapuskasing T,Residential,RT,317307370.0,317320426.0,13056.0,Phase-In assessment exceeds CVA by $13056
+R05,Phase-In <= CVA,error,58044,Nipigon Tp,Commercial,CT,8581600.0,8975400.0,393800.0,Phase-In assessment exceeds CVA by $393800
+R05,Phase-In <= CVA,error,58044,Nipigon Tp,Commercial,CX,466800.0,598600.0,131800.0,Phase-In assessment exceeds CVA by $131800
+R05,Phase-In <= CVA,error,6005,Ottawa C,Industrial,IH,71285495.0,75617791.0,4332296.0,Phase-In assessment exceeds CVA by $4332296
+R05,Phase-In <= CVA,error,57066,Prince Tp,Farmland,FT,1.0,12700.0,12699.0,Phase-In assessment exceeds CVA by $12699
+R05,Phase-In <= CVA,error,30000,Waterloo R,Commercial,CT,5512247908.0,5514247908.0,2000000.0,Phase-In assessment exceeds CVA by $2000000

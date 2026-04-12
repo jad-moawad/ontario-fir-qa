@@ -1,0 +1,10 @@
+rule_id,rule_name,severity,MunID,Municipality,Property Class,RTC/RTQ,CVA Assessment,Phase-In Taxable Assessment,excess,detail
+R05,Phase-In <= CVA,error,29002,Brant County,Managed Forest,TT,9205600.0,9241800,36200.0,Phase-In assessment exceeds CVA by $36200
+R05,Phase-In <= CVA,error,29002,Brant County,Commercial,CX,23159000.0,36060900,12901900.0,Phase-In assessment exceeds CVA by $12901900
+R05,Phase-In <= CVA,error,29002,Brant County,Office Building,DT,1868300.0,1933200,64900.0,Phase-In assessment exceeds CVA by $64900
+R05,Phase-In <= CVA,error,29002,Brant County,Shopping Centre,SU,193200.0,1126700,933500.0,Phase-In assessment exceeds CVA by $933500
+R05,Phase-In <= CVA,error,29002,Brant County,Industrial,IU,8294600.0,8668000,373400.0,Phase-In assessment exceeds CVA by $373400
+R05,Phase-In <= CVA,error,52007,Markstay-Warren M,Residential,RT,232966200.0,235846587,2880387.0,Phase-In assessment exceeds CVA by $2880387
+R05,Phase-In <= CVA,error,52007,Markstay-Warren M,Farmland,FT,13114000.0,13742552,628552.0,Phase-In assessment exceeds CVA by $628552
+R05,Phase-In <= CVA,error,6005,Ottawa C,Industrial,IH,75355395.0,79107309,3751914.0,Phase-In assessment exceeds CVA by $3751914
+R05,Phase-In <= CVA,error,48050,West Nipissing M,Farmland,FT,57181614.0,57644450,462836.0,Phase-In assessment exceeds CVA by $462836

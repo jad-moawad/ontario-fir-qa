@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,tier,sra_sum,total_line_9499,discrepancy,detail
+R12,SRA-LT vs Total sheet line 9499,error,,,ALL,,,,R12 SKIPPED: Total sheet MunID column corrupted (72 MunIDs have mismatched names) for 2022

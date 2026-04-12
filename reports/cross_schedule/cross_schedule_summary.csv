@@ -1,0 +1,16 @@
+year,rule_id,rule_name,severity,n_flags,n_municipalities
+2019,R11,Schedule 26 vs S22 grand total,error,0,0
+2019,R12,SRA-LT vs Total sheet line 9499,error,0,0
+2019,R13,Grand total chain reconciliation,error,0,0
+2020,R11,Schedule 26 vs S22 grand total,error,0,0
+2020,R12,SRA-LT vs Total sheet line 9499,error,0,0
+2020,R13,Grand total chain reconciliation,error,0,0
+2021,R11,Schedule 26 vs S22 grand total,error,0,0
+2021,R12,SRA-LT vs Total sheet line 9499,error,0,0
+2021,R13,Grand total chain reconciliation,error,0,0
+2022,R11,Schedule 26 vs S22 grand total,error,0,0
+2022,R12,SRA-LT vs Total sheet line 9499,error,0,0
+2022,R13,Grand total chain reconciliation,error,0,0
+2023,R11,Schedule 26 vs S22 grand total,error,0,0
+2023,R12,SRA-LT vs Total sheet line 9499,error,0,0
+2023,R13,Grand total chain reconciliation,error,0,0

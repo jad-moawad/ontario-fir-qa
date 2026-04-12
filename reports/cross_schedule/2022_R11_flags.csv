@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,tier,s26_value,spc_value,discrepancy,detail
+R11,Schedule 26 vs S22 grand total,error,,,ALL,,,,R11 SKIPPED: SPC sheet MunID column appears corrupted (138 MunIDs map to multiple municipality names). Schedule 26 data is clean for this year. Sample: MunID 1012: GPL='Cornwall C'; MunID 2001: GPL='East Hawkesbury Tp'; MunID 2008: GPL='Hawkesbury T'

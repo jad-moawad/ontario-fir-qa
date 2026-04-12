@@ -1,0 +1,7 @@
+rule_id,rule_name,severity,MunID,Municipality,year_from,year_to,levy_from,levy_to,pct_change,detail
+R08,Year-over-year total levy change,warning,54032,Brethour Tp,2021,2022,188979.0,259697.0,37.42,"TOTAL levy changed by +37.4% from 2021 to 2022 ($188,979 to $259,697)"
+R08,Year-over-year total levy change,warning,40015,Huron East M,2022,2023,15810573.0,19989704.0,26.43,"TOTAL levy changed by +26.4% from 2022 to 2023 ($15,810,573 to $19,989,704)"
+R08,Year-over-year total levy change,warning,40050,North Huron Tp,2022,2023,8743593.0,11001192.0,25.82,"TOTAL levy changed by +25.8% from 2022 to 2023 ($8,743,593 to $11,001,192)"
+R08,Year-over-year total levy change,warning,51015,Northeastern Manitoulin & The Isl T,2022,2023,6159958.0,1048903.0,-82.97,"TOTAL levy changed by -83.0% from 2022 to 2023 ($6,159,958 to $1,048,903)"
+R08,Year-over-year total levy change,warning,54032,Brethour Tp,2022,2023,259697.0,191382.0,-26.31,"TOTAL levy changed by -26.3% from 2022 to 2023 ($259,697 to $191,382)"
+R08,Year-over-year total levy change,warning,56014,Black River - Matheson Tp,2022,2023,6027008.0,7797411.0,29.37,"TOTAL levy changed by +29.4% from 2022 to 2023 ($6,027,008 to $7,797,411)"

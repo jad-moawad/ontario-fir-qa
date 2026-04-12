@@ -1,0 +1,4 @@
+rule_id,rule_name,severity,MunID,Municipality,tier,gpl_sum,total_line_9299,discrepancy,detail
+R04,GPL <-> Total sheet reconciliation,error,48021,Mattawa T,LT/ST Taxes,2271943,2226696.0,45247.0,LT/ST Taxes: GPL sum $2271943 vs Total line 9299 $2226696
+R04,GPL <-> Total sheet reconciliation,error,48021,Mattawa T,EDUC Taxes,273875,265988.0,7887.0,EDUC Taxes: GPL sum $273875 vs Total line 9299 $265988
+R04,GPL <-> Total sheet reconciliation,error,48021,Mattawa T,TOTAL Taxes,2545818,2492684.0,53134.0,TOTAL Taxes: GPL sum $2545818 vs Total line 9299 $2492684

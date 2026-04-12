@@ -1,0 +1,8 @@
+rule_id,rule_name,severity,n_flags,n_municipalities
+R01,Template arithmetic integrity,error,0,0
+R02,Residential tax ratio = 1.00,error,0,0
+R03,Standard residential EDUC rate,error,0,0
+R04,GPL <-> Total sheet reconciliation,error,1,0
+R05,Phase-In <= CVA,error,6,4
+R06,Within-municipality rate consistency,warning,154,41
+R07,Property class coverage,warning,3,3

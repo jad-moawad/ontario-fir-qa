@@ -34,7 +34,7 @@ data/raw/extras/
 # during development, but DO commit them before pushing for a
 # Streamlit Cloud deployment (the deployed app reads from reports/).
 # Toggle this line when preparing a release.
-reports/
+# reports/   <-- toggled OFF for Phase 4 deployment commit
 
 # Streamlit secrets (never commit credentials)
 .streamlit/secrets.toml

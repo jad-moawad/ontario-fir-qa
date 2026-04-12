@@ -1,0 +1,8 @@
+rule_id,rule_name,severity,MunID,Municipality,Property Class,RTC/RTQ,CVA Assessment,Phase-In Taxable Assessment,excess,detail
+R05,Phase-In <= CVA,error,56052,Fauquier-Strickland Tp,Residential,RT,24419100.0,24429100.0,10000.0,Phase-In assessment exceeds CVA by $10000
+R05,Phase-In <= CVA,error,56052,Fauquier-Strickland Tp,Commercial,CT,431253.0,438753.0,7500.0,Phase-In assessment exceeds CVA by $7500
+R05,Phase-In <= CVA,error,58058,Greenstone M,Commercial,CX,7332000.0,7333000.0,1000.0,Phase-In assessment exceeds CVA by $1000
+R05,Phase-In <= CVA,error,40015,Huron East M,Residential,RT,816527745.0,816529045.0,1300.0,Phase-In assessment exceeds CVA by $1300
+R05,Phase-In <= CVA,error,40015,Huron East M,Managed Forest,TT,3038200.0,3039200.0,1000.0,Phase-In assessment exceeds CVA by $1000
+R05,Phase-In <= CVA,error,58059,Marathon T,Industrial,IM,732720.0,760245.0,27525.0,Phase-In assessment exceeds CVA by $27525
+R05,Phase-In <= CVA,error,6005,Ottawa C,Industrial,IH,75023795.0,79132244.0,4108449.0,Phase-In assessment exceeds CVA by $4108449

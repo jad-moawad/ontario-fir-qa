@@ -1,0 +1,2 @@
+rule_id,rule_name,severity,MunID,Municipality,Tier,RTC/RTQ,Tax Rate Description,Tax Ratio,detail
+R02,Residential tax ratio = 1.00,error,40048,Morris-Turnberry M,LT,R1,Farm. Awaiting Devel. - Ph I,0.25,"Residential tax ratio is 0.25, expected 1.0000"

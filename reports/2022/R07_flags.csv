@@ -1,0 +1,4 @@
+rule_id,rule_name,severity,MunID,Municipality,Tier,n_classes,tier_median,detail
+R07,Property class coverage,warning,51034,Cockburn Island Tp,ST,2,7.0,Only 2 property classes reported (tier ST median is 7)
+R07,Property class coverage,warning,54006,Latchford T,ST,3,7.0,Only 3 property classes reported (tier ST median is 7)
+R07,Property class coverage,warning,54038,Thornloe V,ST,3,7.0,Only 3 property classes reported (tier ST median is 7)

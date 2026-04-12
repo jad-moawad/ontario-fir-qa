@@ -2,6 +2,28 @@
 
 ---
 
+## 2026-04-12: Phase 3 (peer-group outlier rules) deferred to Phase 5
+
+**Scope of what was deferred:** Peer-group outlier rules R14 and R15 using Schedule 02 (Municipal Data, for Tier and MSO region metadata) and Schedule 80 (Statistical Information, for population). The planned rules were:
+
+- R14: Effective residential tax rate vs peer-group median (using Tier, MSO region, population band as the peer group definition, with robust statistics: median and MAD rather than mean and standard deviation).
+- R15: Commercial-to-residential rate ratio vs peer-group median (same peer group structure).
+
+The loader has no `load_schedule_02()` or `load_schedule_80()` functions yet. Both xlsx files are present in `data/raw/2023/` and committed to the repo, but nothing reads them.
+
+**Reason for deferral:** The application deadline is April 16, 2026. With Phases 0-2 complete (11 rules, cross-year, cross-schedule), the marginal value of adding two more warning-severity rules was lower than shipping a polished Phase 4 deliverable: full dashboard, methodology note, README, and deployment. The four existing headline findings (Northeastern Manitoulin, 2022 corruption, Chatham-Kent, Brant County) are strong enough for the interview without peer-group context.
+
+**What Phase 5 implementation requires:**
+1. Add `load_schedule_02(path)` and `load_schedule_80(path)` to `src/fir_qa/loader.py`. Schedule 02 contains Tier, MSO region, and upper-tier parent columns. Schedule 80 contains population and household counts.
+2. Build a peer group lookup: join Schedule 02 and 80 on MunID, then assign municipalities to (Tier, MSO, population band) cells.
+3. Implement R14 and R15 in a new `src/fir_qa/peer_group_rules.py` module following the existing `@_rule_meta` decorator pattern.
+4. Add a "Peer-group view" page to the dashboard showing each municipality's position in its peer distribution.
+5. Add cross-year peer-group rules once the single-year version is stable.
+
+**How to apply:** If Phase 5 work begins, start by loading Schedule 02 into a DataFrame and printing the column list before writing any rule code. The FIR Schedule 02 template has changed between years; verify that the columns of interest (Tier, MSO, population) are present and consistently named before building peer-group logic on top.
+
+---
+
 ## 2026-04-10: Schedule 26 architecture: S26-1 line 9199 matches SPC line 9990 (not 9910)
 
 **Finding**: When comparing Schedule 26-1 line 9199 ("TOTAL before Adj.") to
