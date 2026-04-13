@@ -2,7 +2,7 @@
 
 A domain-aware data quality framework for Ontario's Financial Information Return (FIR) Schedule 22 property tax data. Built as a portfolio project for a Senior Data and Quality Analyst application to the Ontario Ministry of Finance, Property Tax Services Partnerships Branch. The framework demonstrates what an automated QA pipeline for the ministry's own data might look like: 11 rules across five years (2019-2023), up to 444 municipalities, zero false positives on strict arithmetic checks, and cross-year anomaly detection that caught a municipality filing its entire municipal levy as zero.
 
-**Live dashboard:** https://ontario-fir-qa.streamlit.app
+**Live dashboard:** https://ontario-fir.streamlit.app
 
 ---
 
@@ -29,12 +29,6 @@ Rule R05 flagged Brant County's Commercial Vacant Land row with CVA of $23.2M bu
 ## Dashboard
 
 The Streamlit dashboard visualizes all findings. Navigate to any municipality to see its levy trend over 2019-2023 and every flag it carries across all rules. The Summary page includes a province-wide levy change histogram that makes the 2022-2023 acceleration immediately visible.
-
-![Summary page showing rule flag counts and province-wide levy change histogram](docs/images/summary_screenshot.png)
-
-![Northeastern Manitoulin levy cliff: $6.16M in 2022 to $1.05M in 2023](docs/images/manitoulin_screenshot.png)
-
-*(Screenshots to be updated after Streamlit Cloud deployment.)*
 
 ---
 
